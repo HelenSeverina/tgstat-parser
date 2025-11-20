@@ -8,6 +8,7 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.shared import RGBColor
+import os
 import sys
 
 def format_date(raw_date_str):
@@ -124,7 +125,9 @@ def scrape_tgstat():
             print(f"Помилка при обробці поста: {e}")
             continue
 
-    filename = "tgstat_results.docx"
+    script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    filename = os.path.join(script_dir, "tgstat_results.docx")
+
     if processed_count > 0:
         doc.save(filename)
         print("=" * 50)
